@@ -17,27 +17,27 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      description: 'Site title',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
+      description: 'SEO / OpenGraph description',
       type: 'text',
     }),
     defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
+      description: 'SEO / OpenGraph image',
       options: { hotspot: true },
     }),
     defineField({
-      type: 'blockContent',
-      name: 'mainText',
-      title: 'Main Text',
-    }),
-    defineField({
       name: 'images',
-      title: 'Images',
+      title: 'Project Images',
+      description:
+        'Select images to display in the project-gallery. Add descriptions directy to the images in the "Media"-section in the top menu.',
       type: 'array',
       of: [
         defineArrayMember({
@@ -49,9 +49,16 @@ export default defineType({
       ],
     }),
     defineField({
+      type: 'blockContent',
+      name: 'mainText',
+      title: 'Main Text',
+      description: 'Displayed in the menu',
+    }),
+    defineField({
       name: 'menu',
       title: 'Menu',
       type: 'array',
+      description: 'Displayed in the menu',
       of: [
         defineField({
           name: 'section',

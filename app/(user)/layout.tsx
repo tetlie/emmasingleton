@@ -8,13 +8,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title = globals?.title || 'ES'
   const description = globals.description || 'ES'
-  const imageUrl = globals?.image?.asset?.url || ''
+  const imageUrl = globals?.image?.url || ''
 
   return {
     title,
     description,
     openGraph: {
-      images: [imageUrl],
+      images: imageUrl,
     },
   }
 }
@@ -25,6 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const globals = await getGlobals()
+
   return (
     <html lang="en">
       <body className="relative text-base flex flex-col h-svh md:text-lg lg:text-xl font-serif  bg-yellow antialiased">

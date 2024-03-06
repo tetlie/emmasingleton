@@ -7,7 +7,6 @@ import { getImageDimensions } from '@sanity/asset-utils'
 
 // Barebones lazy-loaded image component
 const ImageComponent = ({ value }: any) => {
-  console.log(value)
   const { width, height } = getImageDimensions(value)
   return (
     <figure>
@@ -39,23 +38,14 @@ export const PortableTextComponents = {
   },
   list: {
     bullet: ({ children }: any | undefined) => (
-      <ul className="ml-5 leading-snug list-disc">
-        {children}
-      </ul>
+      <ul className="ml-5 leading-snug list-disc">{children}</ul>
     ),
     number: ({ children }: any | undefined) => <ol className="list-decimal mt-lg">{children}</ol>,
   },
   block: {
     // h1: ({ children }: any | undefined) => <h1 className="py-10 text-5xl font-bold">{children}</h1>,
-    normal: ({ children }: any | undefined) => (
-      <p className="">{children}</p>
-    ),
-    h2: ({ children }: any | undefined) => (
-      <h2 className="">
-        {children}
-      </h2>
-    ),
-
+    normal: ({ children }: any | undefined) => <p className="">{children}</p>,
+    h2: ({ children }: any | undefined) => <h2 className="">{children}</h2>,
   },
   marks: {
     link: ({ children, value }: any | undefined) => {
