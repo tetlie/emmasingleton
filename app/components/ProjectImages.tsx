@@ -29,7 +29,7 @@ export default function ProjectImages({
   return (
     <figure style={{ position: 'relative', height: cover ? '100%' : 'auto' }}>
       <Image
-        blurDataURL={asset.metadata.blurHash}
+        blurDataURL={asset.metadata.lqip}
         placeholder="blur"
         src={asset.url}
         loading="lazy"
