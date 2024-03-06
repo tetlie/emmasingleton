@@ -1,7 +1,8 @@
 import getGlobals from '../../sanity/lib/queries/getGlobals'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@/app/components/PortableTextComponents'
-import ProjectImage from '../components/ProjectImage'
+import ProjectImages from '../components/ProjectImages'
+import DrawingBoard from '../components/Canvas'
 
 export default async function Home() {
   const globals = await getGlobals()
@@ -11,18 +12,23 @@ export default async function Home() {
   const currentImage = images?.[randomIndex]
 
   return (
-    <div className="grid grid-cols-12">
-      <section id="about" className="col-span-full md:col-span-6">
+    <div className="h-full w-full flex flex-grow">
+      {/* <section id="about" className="p-4 lg:pr-0 md:py-8 md:pl-8 lg:pl-20 col-span-full lg:col-span-6">
         {globals?.mainText ? (
           <PortableText value={globals?.mainText} components={PortableTextComponents} />
         ) : null}
-      </section>
-      <section id="projects" className="col-span-full md:col-span-6">
-        <div>
+      </section> */}
+      <section id="projects" className="h-full w-full lg:w-1/2 relative col-span-full lg:col-span-6">
           <h2 className="sr-only">Project</h2>
-          {currentImage ? <ProjectImage image={currentImage} /> : null}
-        </div>
+          {currentImage ? <ProjectImages images={images} cover  /> : null}
       </section>
+      <section id="drawing-board" className="hidden lg:block h-full w-1/2 relative col-span-full lg:col-span-6">
+        <DrawingBoard />
+      </section>
+      {/* <section id="projects-dup" className="hidden lg:block h-full w-1/2 relative col-span-full lg:col-span-6">
+          <h2 className="sr-only">Project</h2>
+          {currentImage ? <ProjectImages images={images} cover  /> : null}
+      </section> */}
     </div>
   )
 }
