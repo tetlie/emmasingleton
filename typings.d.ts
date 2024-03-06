@@ -23,6 +23,6 @@ export interface Globals extends SanityDocument {
   image?: Image
   mainText?: PortableTextBlock[]
   images?: Image[]
-  menu?: { menuSection: PortableTextBlock[] }[]
+  menu?: { _key: string, type: "section", content: PortableTextBlock[] }[]
   seo?: SEO
 }

@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     colors: {
       yellow: '#F5F5DB',
+      black: '#000',
+      white: '#fff',
+      transparent: 'transparent',
+      red: '#FF0000',
     },
     extend: {
+      screens: {
+        l: '1024px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
