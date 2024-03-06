@@ -1,4 +1,4 @@
-"use client"
+'use client'
 // import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent } from 'react'
 
 import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent } from 'react'
@@ -76,8 +76,12 @@ export default function DrawingBoard() {
 
   return (
     <div className="h-full w-full relative">
-      {!hasDrawn && <div className="absolute inset-0 flex items-center justify-center text-2xl pointer-events-none">Draw something</div>}
-      <canvas className="h-full w-full" ref={canvasRef}></canvas>
+      {!hasDrawn && (
+        <div className="absolute inset-0 flex items-center justify-center text-2xl pointer-events-none">
+          Draw something
+        </div>
+      )}
+      <canvas className="h-full w-full cursor-crosshair" ref={canvasRef}></canvas>
     </div>
   )
 }
