@@ -1,12 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { Globals } from '@/typings'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@/app/components/PortableTextComponents'
 
 export default function Header({ globals }: { globals: Globals }) {
-  const [menuIsOpen, setMenuIsOpen] = useState(true)
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setMenuIsOpen(window.matchMedia('(min-width: 1024px)').matches)
+    }
+  }, [])
+
   const toggleMenu = () => setMenuIsOpen((prevState) => !prevState)
 
   return (
@@ -29,7 +36,7 @@ export default function Header({ globals }: { globals: Globals }) {
         </div>
         <div
           id="menu"
-          className={`pt-[57px] lg:border-l  md:pt-[61px] top-0 bg-yellow absolute right-0 h-screen overflow-y-scroll w-screen lg:w-[50vw] transition-transform duration-500 ease-in-out z-40 ${
+          className={`pt-[57px] lg:border-l  md:pt-[61px] top-0 bg-yellow absolute right-0 h-svh overflow-y-scroll w-screen lg:w-[50vw] transition-transform duration-500 ease-in-out z-40 ${
             menuIsOpen ? 'transform-none' : 'transform -translate-y-[100vh]'
           }`}
         >
