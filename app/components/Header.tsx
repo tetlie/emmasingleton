@@ -11,7 +11,8 @@ export default function Header({ globals }: { globals: Globals }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setMenuIsOpen(window.matchMedia('(min-width: 1024px)').matches)
+      // setMenuIsOpen(window.matchMedia('(min-width: 1024px)').matches)
+      setMenuIsOpen(true)
     }
   }, [])
 
