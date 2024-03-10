@@ -33,7 +33,7 @@ export default function ProjectImages({
         placeholder="blur"
         src={asset.url}
         loading="lazy"
-        alt={asset.altText}
+        alt={asset.altText || ''}
         className="z-10"
         {...(cover
           ? { layout: 'fill', objectFit: 'cover' }
@@ -45,10 +45,18 @@ export default function ProjectImages({
         </figcaption>
       ) : null}
       <nav className="absolute flex text-3xl h-full w-full items-center justify-between z-20 text-yellow font-bold">
-        <button className="p-4 md:p-8" aria-label="Previous image" onClick={handlePrev}>
-          &larr;
+        <button
+          className="w-1/2 p-4 md:p-8 h-full cursor-w-resize flex items-center justify-start"
+          aria-label="Previous image"
+          onClick={handlePrev}
+        >
+          <span>&larr;</span>
         </button>
-        <button className="p-4 md:p-8" aria-label="Next image" onClick={handleNext}>
+        <button
+          className="w-1/2 p-4 md:p-8 h-full cursor-e-resize flex items-center justify-end"
+          aria-label="Next image"
+          onClick={handleNext}
+        >
           &rarr;
         </button>
       </nav>
