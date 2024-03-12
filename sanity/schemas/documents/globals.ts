@@ -44,19 +44,14 @@ export default defineType({
           name: 'image',
           title: 'Image',
           type: 'image',
+          icon: () => '🖼️',
           options: { hotspot: true },
         }),
       ],
     }),
     defineField({
-      type: 'blockContent',
-      name: 'mainText',
-      title: 'Main Text',
-      description: 'Displayed in the menu',
-    }),
-    defineField({
       name: 'menu',
-      title: 'Menu',
+      title: 'Menu Sections',
       type: 'array',
       description: 'Displayed in the menu',
       of: [
@@ -64,6 +59,7 @@ export default defineType({
           name: 'section',
           title: 'Section',
           type: 'object',
+          icon: () => '🖋️',
           fields: [
             defineField({
               type: 'blockContent',

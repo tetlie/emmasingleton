@@ -47,11 +47,6 @@ export default function Header({ globals }: { globals: Globals }) {
             {globals.images ? <ProjectImages images={globals.images} cover /> : null}
           </section>
           <ul>
-            {globals?.mainText ? (
-              <li key={`menuItem-mainText`} className="border-b last:border-none p-4 md:p-8">
-                <PortableText value={globals?.mainText} components={PortableTextComponents} />
-              </li>
-            ) : null}
             {globals.menu?.map((section, idx) => (
               <li key={`menuItem-${idx}`} className="border-b last:border-none p-4 md:p-8">
                 <PortableText value={section.content} components={PortableTextComponents} />
