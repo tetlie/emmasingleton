@@ -10,9 +10,7 @@ export default function Header({ globals }: { globals: Globals }) {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setMenuIsOpen(true)
-    }
+    setMenuIsOpen(true)
   }, [])
 
   const toggleMenu = () => setMenuIsOpen((prevState) => !prevState)
