@@ -38,7 +38,7 @@ export const PortableTextComponents = {
   },
   list: {
     bullet: ({ children }: any | undefined) => (
-      <ul className="ml-5 leading-snug list-disc">{children}</ul>
+      <ul className="ml-4 leading-snug list-disc list-outside">{children}</ul>
     ),
     number: ({ children }: any | undefined) => <ol className="list-decimal mt-lg">{children}</ol>,
   },
@@ -56,7 +56,7 @@ export const PortableTextComponents = {
           href={value.href}
           rel={rel}
           target={target}
-          className="underline decoration-black hover:decoration-transparent"
+          className="underline underline-offset-2 decoration-1 decoration-black hover:decoration-transparent"
         >
           {children}
         </Link>
