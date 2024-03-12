@@ -11,7 +11,6 @@ export default function Header({ globals }: { globals: Globals }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // setMenuIsOpen(window.matchMedia('(min-width: 1024px)').matches)
       setMenuIsOpen(true)
     }
   }, [])
@@ -44,7 +43,7 @@ export default function Header({ globals }: { globals: Globals }) {
         >
           <section
             id="projects"
-            className="w-full aspect-square md:aspect-auto md:h-full lg:hidden relative"
+            className="w-full aspect-square border-b md:aspect-auto md:h-full lg:hidden relative"
           >
             <h2 className="sr-only">Project</h2>
             {globals.images ? <ProjectImages images={globals.images} cover /> : null}
