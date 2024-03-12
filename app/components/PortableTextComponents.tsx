@@ -38,7 +38,7 @@ export const PortableTextComponents = {
   },
   list: {
     bullet: ({ children }: any | undefined) => (
-      <ul className="ml-4 leading-snug list-disc list-outside">{children}</ul>
+      <ul className="leading-snug list-disc list-inside">{children}</ul>
     ),
     number: ({ children }: any | undefined) => <ol className="list-decimal mt-lg">{children}</ol>,
   },
