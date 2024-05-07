@@ -19,7 +19,7 @@ export default function Header({ globals }: { globals: Globals }) {
         <div className="relative">
           <div
             id="header"
-            className="relative flex items-center z-50 justify-between px-2 bg-white md:px-4 py-4"
+            className="relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 py-4"
           >
             <h1>{globals.title}</h1>
             <div className="flex gap-2 md:gap-4">
@@ -29,8 +29,8 @@ export default function Header({ globals }: { globals: Globals }) {
                 onClick={toggleMenu}
               >
                 <span
-                  className={`block transition-transform duration-500 ease-in-out ${
-                    menuIsOpen ? 'underline ' : ''
+                  className={`block transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
+                    menuIsOpen ? 'underline ' : 'hover:underline '
                   }`}
                 >
                   Work, information
@@ -47,15 +47,15 @@ export default function Header({ globals }: { globals: Globals }) {
           </div>
           <div
             id="menu"
-            className={`pt-[57px] md:pt-[61px] top-0 bg-white absolute left-0 h-auto overflow-y-scroll w-screen transition-transform duration-300 ease-in-out z-40 ${
+            className={`leading-snug pt-[57px] md:pt-[61px] top-0 pb-8 lg:pb-4 bg-white absolute left-0 h-auto overflow-y-scroll w-screen transition-transform duration-300 ease-in-out z-40 ${
               menuIsOpen ? 'transform-none' : 'transform -translate-y-[100vh]'
             }`}
           >
-            <ul className="flex flex-wrap">
+            <ul className="flex flex-wrap justify-between gap-y-4 px-1 md:px-2">
               {globals.menu?.map((section, idx) => (
                 <li
                   key={`menuItem-${idx}`}
-                  className={idx < 2 ? 'w-full lg:w-1/2 p-2 md:p-4' : 'w-full lg:w-1/4 p-2 md:p-4'}
+                  className={idx < 2 ? 'w-full lg:w-1/2 p-1 md:p-2' : 'w-full lg:w-1/4 p-1 md:p-2'}
                 >
                   <PortableText value={section.content} components={PortableTextComponents} />
                 </li>

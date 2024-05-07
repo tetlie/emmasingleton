@@ -46,6 +46,7 @@ export const PortableTextComponents = {
     // h1: ({ children }: any | undefined) => <h1 className="py-10 text-5xl font-bold">{children}</h1>,
     normal: ({ children }: any | undefined) => <p className="">{children}</p>,
     h2: ({ children }: any | undefined) => <h2 className="">{children}</h2>,
+    indented: ({ children }: any | undefined) => <p className="pl-4 lg:pl-8">{children}</p>,
   },
   marks: {
     link: ({ children, value }: any | undefined) => {
@@ -56,7 +57,7 @@ export const PortableTextComponents = {
           href={value.href}
           rel={rel}
           target={target}
-          className="underline underline-offset-2 decoration-1 decoration-black hover:decoration-transparent"
+          className="hover:underline underline-offset-2 decoration-1 decoration-black"
         >
           {children}
         </Link>
