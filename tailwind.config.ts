@@ -7,6 +7,9 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      serif: ['Times New Roman', "Times", 'serif'],
+    },
     colors: {
       yellow: '#F5F5DB',
       black: '#000',
