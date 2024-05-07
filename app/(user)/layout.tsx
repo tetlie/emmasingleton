@@ -28,9 +28,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="relative text-base flex flex-col overflow-hidden md:text-lg lg:text-xl font-serif  bg-yellow antialiased">
+      <body className="relative text-base flex flex-col overflow-hidden md:text-lg  font-serif bg-white antialiased">
         <Header globals={globals} />
-        <main className="h-svh pt-[57px] md:pt-[61px] flex flex-grow flex-col items-center justify-between">
+        <main className="h-svh flex flex-grow flex-col items-center justify-between">
           {children}
         </main>
       </body>

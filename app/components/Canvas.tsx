@@ -105,7 +105,7 @@ export default function DrawingBoard() {
   return (
     <div className="h-full w-full relative">
       {!hasDrawn && (
-        <div className="z-0 absolute touch-none inset-0 flex text-xl lg:text-2xl items-center justify-center pointer-events-none">
+        <div className="z-0 absolute touch-none inset-0 flex text-xl  items-center justify-center pointer-events-none">
           Draw something
         </div>
       )}
