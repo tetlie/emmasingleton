@@ -25,3 +25,16 @@ export interface Globals extends SanityDocument {
   menu?: { _key: string; type: 'section'; content: PortableTextBlock[] }[]
   seo?: SEO
 }
+
+export interface ProjectImage {
+  _type: 'projectImage'
+  _key: string
+  image: Image
+  layout: 'cover' | 'contain'
+}
+
+export interface Project extends SanityDocument {
+  title: string
+  text?: PortableTextBlock[]
+  projectImages?: ProjectImage[]
+}

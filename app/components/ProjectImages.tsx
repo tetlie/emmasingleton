@@ -2,29 +2,52 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import type { Image as ImageType } from '@/typings'
+import type { Image as ImageType, Project } from '@/typings'
+import { PortableTextBlock } from 'sanity'
+import { SanityImageAssetDocument } from 'next-sanity'
 
-export default function ProjectImages({
-  images,
-  cover = false,
-}: {
-  images: ImageType[]
-  cover?: boolean
-}) {
+type ProjectImage = {
+  title: string
+  text: PortableTextBlock[]
+  _type: 'image'
+  asset: SanityImageAssetDocument
+  layout: 'cover' | 'contain'
+}
+
+export default function ProjectImages({ projects }: { projects: Project[] }) {
+  const projectImages: ProjectImage[] = projects
+    .map((project) => {
+      return project.projectImages?.map((image) => {
+        return {
+          title: project.title,
+          text: project.text,
+          _type: 'image',
+          asset: image.image.asset,
+          layout: image.layout,
+        }
+      })
+    })
+    .flat()
+    .filter((image): image is ProjectImage => image !== undefined)
+
+  console.log(projectImages)
+
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const currentImage = images[currentIndex] || null
+  const currentImage = projectImages[currentIndex] || null
 
   const handleNext = () => {
-    setCurrentIndex((currentIndex + 1) % images.length)
+    setCurrentIndex((currentIndex + 1) % projectImages.length)
   }
 
   const handlePrev = () => {
-    setCurrentIndex((currentIndex - 1 + images.length) % images.length)
+    setCurrentIndex((currentIndex - 1 + projectImages.length) % projectImages.length)
   }
 
   const asset = currentImage?.asset || null
   const { width, height } = asset.metadata.dimensions
+
+  const cover = currentImage.layout == 'cover'
 
   return (
     <figure
@@ -37,7 +60,7 @@ export default function ProjectImages({
         src={asset.url}
         loading="lazy"
         alt={asset.altText || ''}
-        className="z-10 object-cover"
+        className="z-10 object-contain"
         quality={95}
         sizes="(max-width: 1023px) 200vw, 200vh"
         {...(cover
@@ -45,7 +68,7 @@ export default function ProjectImages({
           : { width, height, style: { display: 'block', aspectRatio: width / height } })}
       />
       {/* {asset.description ? ( */}
-      <figcaption className="fixed bottom-0 left-0 px-2 max-w-[80vw] leading-none md:px-4 py-2 md:my-4 text-black z-[60]">
+      <figcaption className="fixed bottom-0 left-0 px-2 text-xs max-w-[80vw] leading-none md:px-4 py-2 md:my-4 text-black z-[60]">
         <span className="italic"> {asset.title}:</span> {asset.description}
       </figcaption>
       {/* ) : null} */}
