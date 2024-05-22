@@ -16,33 +16,26 @@ export default function Header({ globals }: { globals: Globals }) {
   return (
     <>
       <header className="absolute top-0 left-0 w-full">
-        <div className="relative">
+        <button
+          type="button"
+          aria-label={menuIsOpen ? 'Close menu' : 'Open menu'}
+          onClick={toggleMenu}
+          className="relative block text-left w-full"
+        >
           <div
             id="header"
-            className="relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 py-4"
+            className="w-full relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4"
           >
             <h1>{globals.title}</h1>
             <div className="flex gap-2 md:gap-4">
-              <button
-                type="button"
-                aria-label={menuIsOpen ? 'Close menu' : 'Open menu'}
-                onClick={toggleMenu}
+              <span
+                className={`block transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
+                  menuIsOpen ? 'underline ' : 'hover:underline '
+                }`}
               >
-                <span
-                  className={`block transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
-                    menuIsOpen ? 'underline ' : 'hover:underline '
-                  }`}
-                >
-                  Work, information
-                </span>
-              </button>
-              <button
-                type="button"
-                aria-label={canvasIsOpen ? 'Close canvas' : 'Open canvas'}
-                onClick={toggleCanvas}
-              >
-                <div className="size-[20px] bg-black rounded-full"></div>
-              </button>
+                Work, information
+              </span>
+              <div className="size-[20px] bg-black rounded-full"></div>
             </div>
           </div>
           <div
@@ -51,40 +44,55 @@ export default function Header({ globals }: { globals: Globals }) {
               menuIsOpen ? 'transform-none' : 'transform -translate-y-[100vh]'
             }`}
           >
-            <ul className="flex flex-wrap justify-between gap-y-4 px-1 md:px-2">
+            <ul className="flex flex-wrap justify-between gap-y-4 px-1 md:px-2 lg:px-4">
               {globals.menu?.map((section, idx) => (
                 <li
                   key={`menuItem-${idx}`}
-                  className={idx < 2 ? 'w-full lg:w-1/2 p-1 md:p-2' : 'w-full lg:w-1/4 p-1 md:p-2'}
+                  className={
+                    idx < 2
+                      ? 'w-full lg:w-1/2 p-1 md:p-2 lg:p-4'
+                      : 'lg:even:text-right w-full lg:w-1/4 p-1 md:p-2 lg:p-4'
+                  }
                 >
                   <PortableText value={section.content} components={PortableTextComponents} />
                 </li>
               ))}
             </ul>
           </div>
-          <div
-            id="drawing-board"
-            className={`pt-[57px] md:pt-[61px] top-0 bg-white/40 backdrop-blur-xl absolute left-0 h-svh overflow-y-scroll w-screen transition-transform duration-300 ease-in-out z-30 ${
-              canvasIsOpen ? 'transform-none' : 'transform translate-y-[100vh]'
-            }`}
-          >
-            <DrawingBoard />
-          </div>
-        </div>
+        </button>
       </header>
+      <div
+        id="drawing-board"
+        className={`pt-[57px] md:pt-[61px] top-0 bg-white/40 backdrop-blur-xl absolute left-0 h-svh overflow-y-scroll w-screen transition-transform duration-300 ease-in-out z-30 ${
+          canvasIsOpen ? 'transform-none' : 'transform translate-y-[100vh]'
+        }`}
+      >
+        <DrawingBoard />
+      </div>
       <footer className="absolute bottom-0 left-0 w-full">
         <div
           id="footer"
-          className="relative flex items-center z-50 justify-between px-2 bg-white md:px-4 py-4"
+          className="relative flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4"
         >
           <div>&nbsp;</div>
-          <button
-            type="button"
-            aria-label={canvasIsOpen ? 'Close canvas' : 'Open canvas'}
-            onClick={toggleCanvas}
-          >
-            <div className="size-[20px] bg-black rounded-full"></div>
-          </button>
+          <div className="flex gap-2 md:gap-4">
+            {/* <button
+              type="button"
+              onClick={() => clearCanvas}
+              className={`transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
+                canvasIsOpen ? 'block ' : 'hidden '
+              }`}
+            >
+              Clear canvas
+            </button> */}
+            <button
+              type="button"
+              aria-label={canvasIsOpen ? 'Close canvas' : 'Open canvas'}
+              onClick={toggleCanvas}
+            >
+              <div className="size-[20px] bg-black rounded-full"></div>
+            </button>
+          </div>
         </div>
       </footer>
     </>
