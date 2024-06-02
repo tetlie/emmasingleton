@@ -1,45 +1,100 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { CanvasActionsContext, CanvasStateContext } from './Context'
+import { PortableTextComponents } from './PortableTextComponents'
+import { PortableText } from '@portabletext/react'
+import type { PortableTextBlock } from 'sanity'
 
 export default function Footer() {
   const { footerText, canvasIsOpen, hasDrawn } = useContext(CanvasStateContext)
   const { toggleCanvas, clearCanvas } = useContext(CanvasActionsContext)
+  const [displayedFooterText, setDisplayedFooterText] = useState(footerText)
+  const [isAnimating, setIsAnimating] = useState(false)
 
+  useEffect(() => {
+    if (!isAnimating) {
+      setDisplayedFooterText(footerText)
+    }
+  }, [footerText, isAnimating])
+
+  const handleAnimationStart = () => {
+    setIsAnimating(true)
+  }
+
+  const handleAnimationComplete = () => {
+    setIsAnimating(false)
+    setDisplayedFooterText(footerText)
+  }
+
+  const generateKey = (text: PortableTextBlock[]) => text.map((block) => block._key).join('-')
+
+  const textAnimation: Variants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -10 },
+  }
   return (
-    <footer className="w-full">
-      <div
-        id="footer"
-        className="text-sm  relative flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4"
-      >
-        {canvasIsOpen && (
-          <div>
-            {hasDrawn ? (
-              <button
-                type="button"
-                onClick={clearCanvas}
-                className={`transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
-                  canvasIsOpen ? 'block ' : 'hidden '
-                }`}
+    <footer className="w-full transition-height duration-150 ease-in text-sm md:text-lg relative flex items-end md:items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4">
+      <AnimatePresence mode="wait">
+        {canvasIsOpen &&
+          (hasDrawn ? (
+            <motion.button
+              key="clearCanvas"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.2 }}
+              variants={textAnimation}
+              type="button"
+              onClick={clearCanvas}
+              className="underline-offset-2 decoration-1 decoration-black"
+            >
+              Clear canvas
+            </motion.button>
+          ) : (
+            <motion.span
+              key="drawSomething"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.2 }}
+              variants={textAnimation}
+            >
+              Draw something
+            </motion.span>
+          ))}
+        {!canvasIsOpen && (
+          <>
+            {displayedFooterText.length > 0 ? (
+              <motion.div
+                key={generateKey(displayedFooterText)}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={textAnimation}
+                onAnimationStart={handleAnimationStart}
+                onAnimationComplete={handleAnimationComplete}
               >
-                Clear canvas
-              </button>
+                <div className="max-w-[80vw]">
+                  <PortableText value={displayedFooterText} components={PortableTextComponents} />
+                </div>
+              </motion.div>
             ) : (
-              <span>Draw something</span>
+              <span>Loading project...</span>
             )}
-          </div>
+          </>
         )}
-        {!canvasIsOpen && <div className="max-w-[80vw]">{footerText as string}</div>}
-        <div className="flex gap-2 md:gap-4">
-          <button
-            type="button"
-            aria-label={canvasIsOpen ? 'Close canvas' : 'Open canvas'}
-            onClick={toggleCanvas}
-          >
-            <div className="size-[20px] bg-black rounded-full"></div>
-          </button>
-        </div>
+      </AnimatePresence>
+      <div className="flex gap-2 md:gap-4">
+        <button
+          type="button"
+          aria-label={canvasIsOpen ? 'Close canvas' : 'Open canvas'}
+          onClick={toggleCanvas}
+        >
+          <div className="size-[20px] bg-black rounded-full"></div>
+        </button>
       </div>
     </footer>
   )

@@ -23,7 +23,7 @@ export default function Header({ globals }: { globals: Globals }) {
           className="w-full relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4"
         >
           <h1>{globals.title}</h1>
-          <div className="flex gap-2 md:gap-4">
+          <div className="flex items-center justify-center gap-2 md:gap-4">
             <span
               className={`block transition-transform duration-500 ease-in-out underline-offset-2 decoration-1 decoration-black ${
                 menuIsOpen ? 'underline ' : 'hover:underline '
