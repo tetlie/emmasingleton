@@ -3,11 +3,10 @@
 import { useContext } from 'react'
 
 import Canvas from './Canvas'
-import { CanvasContext } from './Context'
+import { CanvasStateContext } from './Context'
 
 export default function CanvasWrapper() {
-  const { canvasIsOpen } = useContext(CanvasContext)
-
+  const { canvasIsOpen } = useContext(CanvasStateContext)
   return (
     <div
       id="canvas-wrapper"

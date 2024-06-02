@@ -1,15 +1,13 @@
 'use client'
 
 import { useRef, useEffect, MouseEvent as ReactMouseEvent, useContext } from 'react'
-import { CanvasContext } from './Context'
-import { set } from 'sanity'
+import { CanvasActionsContext, CanvasStateContext } from './Context'
 
 export default function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const { hasDrawn, setHasDrawn, setClearCanvas } = useContext(CanvasContext)
+  const { setHasDrawn, setClearCanvas } = useContext(CanvasActionsContext)
 
   const clearCanvas = () => {
-    console.log('Clearing canvas')
     const canvas = canvasRef.current
     if (canvas) {
       const context = canvas.getContext('2d')

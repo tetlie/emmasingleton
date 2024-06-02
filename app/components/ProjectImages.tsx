@@ -5,7 +5,7 @@ import Image from 'next/image'
 import type { Image as ImageType, Project } from '@/typings'
 import { PortableTextBlock } from 'sanity'
 import { SanityImageAssetDocument } from 'next-sanity'
-import { CanvasContext } from './Context'
+import { CanvasActionsContext } from './Context'
 
 type ProjectImage = {
   title: string
@@ -16,7 +16,7 @@ type ProjectImage = {
 }
 
 export default function ProjectImages({ projects }: { projects: Project[] }) {
-  const { setFooterText } = useContext(CanvasContext)
+  const { setFooterText } = useContext(CanvasActionsContext)
   const projectImages: ProjectImage[] = projects
     .map((project) => {
       return project.projectImages?.map((image) => {

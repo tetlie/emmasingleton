@@ -1,11 +1,11 @@
 'use client'
 
 import { useContext } from 'react'
-import { CanvasContext } from './Context'
+import { CanvasActionsContext, CanvasStateContext } from './Context'
 
 export default function Footer() {
-  const { footerText, canvasIsOpen, toggleCanvas, hasDrawn, clearCanvas } =
-    useContext(CanvasContext)
+  const { footerText, canvasIsOpen, hasDrawn } = useContext(CanvasStateContext)
+  const { toggleCanvas, clearCanvas } = useContext(CanvasActionsContext)
 
   return (
     <footer className="w-full">

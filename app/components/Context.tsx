@@ -1,27 +1,41 @@
 'use client'
 
-import { createContext, useState, useCallback, ReactNode, Dispatch, SetStateAction } from 'react'
+import {
+  createContext,
+  useState,
+  useCallback,
+  useMemo,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import { PortableTextBlock } from 'sanity'
 
-export type CanvasContextType = {
+export type CanvasStateType = {
   hasDrawn: boolean
-  setHasDrawn: Dispatch<SetStateAction<boolean>>
   canvasIsOpen: boolean
+  footerText: PortableTextBlock[] | string
+}
+
+export type CanvasActionsType = {
+  setHasDrawn: Dispatch<SetStateAction<boolean>>
   setCanvasIsOpen: Dispatch<SetStateAction<boolean>>
   toggleCanvas: () => void
-  footerText: PortableTextBlock[] | string
   setFooterText: Dispatch<SetStateAction<PortableTextBlock[]>>
   clearCanvas: () => void
   setClearCanvas: Dispatch<SetStateAction<() => void>>
 }
 
-export const CanvasContext = createContext<CanvasContextType>({
+export const CanvasStateContext = createContext<CanvasStateType>({
   hasDrawn: false,
-  setHasDrawn: () => {},
   canvasIsOpen: false,
+  footerText: '',
+})
+
+export const CanvasActionsContext = createContext<CanvasActionsType>({
+  setHasDrawn: () => {},
   setCanvasIsOpen: () => {},
   toggleCanvas: () => {},
-  footerText: '',
   setFooterText: () => {},
   clearCanvas: () => {},
   setClearCanvas: () => {},
@@ -37,17 +51,25 @@ export function AppWrapper({ children }: { children: ReactNode }) {
     setCanvasIsOpen((prevState) => !prevState)
   }, [])
 
-  const contextValue: CanvasContextType = {
-    hasDrawn,
-    setHasDrawn,
-    canvasIsOpen,
-    setCanvasIsOpen,
-    toggleCanvas,
-    footerText,
-    setFooterText,
-    clearCanvas,
-    setClearCanvas,
-  }
+  const state = useMemo(
+    () => ({ hasDrawn, canvasIsOpen, footerText }),
+    [hasDrawn, canvasIsOpen, footerText]
+  )
+  const actions = useMemo(
+    () => ({
+      setHasDrawn,
+      setCanvasIsOpen,
+      toggleCanvas,
+      setFooterText,
+      clearCanvas,
+      setClearCanvas,
+    }),
+    [setHasDrawn, setCanvasIsOpen, toggleCanvas, setFooterText, clearCanvas, setClearCanvas]
+  )
 
-  return <CanvasContext.Provider value={contextValue}>{children}</CanvasContext.Provider>
+  return (
+    <CanvasStateContext.Provider value={state}>
+      <CanvasActionsContext.Provider value={actions}>{children}</CanvasActionsContext.Provider>
+    </CanvasStateContext.Provider>
+  )
 }
