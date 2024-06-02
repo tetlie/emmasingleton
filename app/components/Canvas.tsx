@@ -1,10 +1,10 @@
 'use client'
 
-import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent, useContext } from 'react'
+import { useRef, useEffect, MouseEvent as ReactMouseEvent, useContext } from 'react'
 import { CanvasContext } from './Context'
 import { set } from 'sanity'
 
-export default function DrawingBoard() {
+export default function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const { hasDrawn, setHasDrawn, setClearCanvas } = useContext(CanvasContext)
 

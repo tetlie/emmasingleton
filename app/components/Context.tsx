@@ -9,13 +9,23 @@ export type CanvasContextType = {
   canvasIsOpen: boolean
   setCanvasIsOpen: Dispatch<SetStateAction<boolean>>
   toggleCanvas: () => void
-  footerText: PortableTextBlock[]
+  footerText: PortableTextBlock[] | string
   setFooterText: Dispatch<SetStateAction<PortableTextBlock[]>>
   clearCanvas: () => void
   setClearCanvas: Dispatch<SetStateAction<() => void>>
 }
 
-export const CanvasContext = createContext<CanvasContextType | null>(null)
+export const CanvasContext = createContext<CanvasContextType>({
+  hasDrawn: false,
+  setHasDrawn: () => {},
+  canvasIsOpen: false,
+  setCanvasIsOpen: () => {},
+  toggleCanvas: () => {},
+  footerText: '',
+  setFooterText: () => {},
+  clearCanvas: () => {},
+  setClearCanvas: () => {},
+})
 
 export function AppWrapper({ children }: { children: ReactNode }) {
   const [hasDrawn, setHasDrawn] = useState<boolean>(false)
