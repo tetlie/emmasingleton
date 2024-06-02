@@ -8,13 +8,14 @@ import {
   ReactNode,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
 import { PortableTextBlock } from 'sanity'
 
 export type CanvasStateType = {
   hasDrawn: boolean
   canvasIsOpen: boolean
-  footerText: PortableTextBlock[] | string
+  footerText: PortableTextBlock[]
 }
 
 export type CanvasActionsType = {
@@ -29,7 +30,7 @@ export type CanvasActionsType = {
 export const CanvasStateContext = createContext<CanvasStateType>({
   hasDrawn: false,
   canvasIsOpen: false,
-  footerText: '',
+  footerText: [],
 })
 
 export const CanvasActionsContext = createContext<CanvasActionsType>({
@@ -66,6 +67,11 @@ export function AppWrapper({ children }: { children: ReactNode }) {
     }),
     [setHasDrawn, setCanvasIsOpen, toggleCanvas, setFooterText, clearCanvas, setClearCanvas]
   )
+
+  useEffect(() => {
+    console.log('Canvas is open:', canvasIsOpen)
+  }),
+    [canvasIsOpen]
 
   return (
     <CanvasStateContext.Provider value={state}>

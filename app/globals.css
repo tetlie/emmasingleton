@@ -7,3 +7,8 @@
     text-wrap: balance;
   }
 }
+
+/* Add this to your global styles or a CSS module */
+.footer-container {
+  transition: height 0.5s ease-in-out;
+}

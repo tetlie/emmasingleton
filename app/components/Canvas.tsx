@@ -76,8 +76,6 @@ export default function Canvas() {
     }
 
     const resizeCanvas = () => {
-      console.log('Resizing canvas')
-
       // Save the current image data
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
 
