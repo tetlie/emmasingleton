@@ -1,11 +1,28 @@
 'use client'
-// import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent } from 'react'
 
-import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent } from 'react'
+import { useRef, useEffect, useState, MouseEvent as ReactMouseEvent, useContext } from 'react'
+import { CanvasContext } from './Context'
+import { set } from 'sanity'
 
 export default function DrawingBoard() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const [hasDrawn, setHasDrawn] = useState(false)
+  const { hasDrawn, setHasDrawn, setClearCanvas } = useContext(CanvasContext)
+
+  const clearCanvas = () => {
+    console.log('Clearing canvas')
+    const canvas = canvasRef.current
+    if (canvas) {
+      const context = canvas.getContext('2d')
+      if (context) {
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        setHasDrawn(false) // Optional: Reset hasDrawn state if needed
+      }
+    }
+  }
+
+  useEffect(() => {
+    setClearCanvas(() => clearCanvas)
+  }, [setClearCanvas])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -104,11 +121,6 @@ export default function DrawingBoard() {
 
   return (
     <div className="h-full w-full relative">
-      {!hasDrawn && (
-        <div className="z-0 absolute touch-none inset-0 flex text-xl  items-center justify-center pointer-events-none">
-          Draw something
-        </div>
-      )}
       <canvas className="z-10 h-full w-full cursor-crosshair" ref={canvasRef}></canvas>
     </div>
   )

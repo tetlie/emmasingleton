@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Image from 'next/image'
 import type { Image as ImageType, Project } from '@/typings'
 import { PortableTextBlock } from 'sanity'
 import { SanityImageAssetDocument } from 'next-sanity'
+import { CanvasContext } from './Context'
 
 type ProjectImage = {
   title: string
@@ -15,6 +16,7 @@ type ProjectImage = {
 }
 
 export default function ProjectImages({ projects }: { projects: Project[] }) {
+  const { setFooterText } = useContext(CanvasContext)
   const projectImages: ProjectImage[] = projects
     .map((project) => {
       return project.projectImages?.map((image) => {
@@ -49,6 +51,11 @@ export default function ProjectImages({ projects }: { projects: Project[] }) {
 
   const cover = currentImage.layout == 'cover'
 
+  useEffect(() => {
+    setFooterText(asset.description)
+    console.log(asset.description)
+  }, [currentImage])
+
   return (
     <figure
       className={cover ? 'aspect-square sm:aspect-auto sm:h-full w-full' : 'h-auto'}
@@ -68,9 +75,9 @@ export default function ProjectImages({ projects }: { projects: Project[] }) {
           : { width, height, style: { display: 'block', aspectRatio: width / height } })}
       />
       {/* {asset.description ? ( */}
-      <figcaption className="fixed bottom-0 left-0 px-2 text-xs max-w-[80vw] leading-none md:px-4 py-2 md:my-4 text-black z-[60]">
+      {/* <figcaption className="fixed bottom-0 left-0 px-2 text-xs max-w-[80vw] leading-none md:px-4 py-2 md:my-4 text-black z-[60]">
         <span className="italic"> {asset.title}:</span> {asset.description}
-      </figcaption>
+      </figcaption> */}
       {/* ) : null} */}
       <nav className="absolute flex text-3xl h-full w-full items-center justify-between z-20 text-white font-bold">
         <button

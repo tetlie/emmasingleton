@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import '../globals.css'
 import getGlobals from '../../sanity/lib/queries/getGlobals'
 import Header from '../components/Header'
+import { AppWrapper } from '../components/Context'
+import Footer from '../components/Footer'
 
 export async function generateMetadata(): Promise<Metadata> {
   const globals = await getGlobals()
@@ -28,12 +30,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="relative text-base flex flex-col overflow-hidden md:text-lg  font-serif bg-white antialiased">
-        <Header globals={globals} />
-        <main className="h-svh flex flex-grow flex-col items-center justify-between">
-          {children}
-        </main>
-      </body>
+      <AppWrapper>
+        <body className="relative text-base flex flex-col overflow-hidden md:text-lg  font-serif bg-white antialiased">
+          <Header globals={globals} />
+          <main className="h-svh flex flex-grow flex-col items-center justify-between">
+            {children}
+          </main>
+          <Footer />
+        </body>
+      </AppWrapper>
     </html>
   )
 }
