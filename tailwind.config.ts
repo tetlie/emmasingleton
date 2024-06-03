@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      serif: ['Times New Roman', "Times", 'serif'],
+      serif: ['Times New Roman', 'Times', 'serif'],
     },
     colors: {
       yellow: '#F5F5DB',
@@ -24,6 +24,13 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      transitionProperty: {
+        height: 'height',
+        maxHeight: 'max-height',
+        width: 'width',
+        spacing: 'margin, padding',
+        scale: 'transform',
       },
     },
   },
