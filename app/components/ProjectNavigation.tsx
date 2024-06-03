@@ -26,7 +26,7 @@ const ImageNavigation: React.FC<ImageNavigationProps> = ({ onNext, onPrev }) => 
 
   return (
     <>
-      {/* <nav className="h-full absolute flex top-0 text-3xl w-full items-center justify-between z-20 text-white font-bold">
+      <nav className="h-full absolute flex top-0 text-3xl w-full items-center justify-between z-20 text-white font-bold">
         <button
           className="w-1/2 p-4 md:p-8 h-full cursor-w-resize flex items-center justify-start"
           aria-label="Previous image"
@@ -41,7 +41,7 @@ const ImageNavigation: React.FC<ImageNavigationProps> = ({ onNext, onPrev }) => 
         >
           &rarr;
         </button>
-      </nav> */}
+      </nav>
     </>
   )
 }
