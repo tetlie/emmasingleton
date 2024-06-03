@@ -36,7 +36,7 @@ export default function Footer() {
     exit: { opacity: 0, y: -10 },
   }
   return (
-    <footer className="w-full transition-height duration-150 ease-in text-sm md:text-lg relative flex items-end md:items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4">
+    <footer className="w-full leading-none transition-height duration-150 ease-in text-sm md:text-lg relative flex items-end md:items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-3 lg:py-4">
       <AnimatePresence mode="wait">
         {canvasIsOpen &&
           (hasDrawn ? (
@@ -51,6 +51,10 @@ export default function Footer() {
               onClick={clearCanvas}
               className="underline-offset-2 decoration-1 decoration-black"
             >
+              <span className="md:hidden">
+                &nbsp;
+                <br />
+              </span>
               Clear canvas
             </motion.button>
           ) : (
@@ -62,6 +66,10 @@ export default function Footer() {
               transition={{ duration: 0.2 }}
               variants={textAnimation}
             >
+              <span className="md:hidden">
+                &nbsp;
+                <br />
+              </span>
               Draw something
             </motion.span>
           ))}
@@ -82,7 +90,14 @@ export default function Footer() {
                 </div>
               </motion.div>
             ) : (
-              <span>Loading project...</span>
+              <span>
+                {' '}
+                <span className="md:hidden">
+                  &nbsp;
+                  <br />
+                </span>
+                Loading project...
+              </span>
             )}
           </>
         )}

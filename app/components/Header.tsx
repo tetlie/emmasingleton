@@ -20,7 +20,7 @@ export default function Header({ globals }: { globals: Globals }) {
       >
         <div
           id="header"
-          className="w-full relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-4"
+          className="w-full relative leading-none flex items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-3 lg:py-4"
         >
           <h1>{globals.title}</h1>
           <div className="flex items-center justify-center gap-2 md:gap-4">
