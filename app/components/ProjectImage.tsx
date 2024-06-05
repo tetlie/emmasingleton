@@ -36,7 +36,8 @@ const ProjectImage: React.FC<ImageDisplayProps> = ({ asset, layout }) => {
         alt={altText || ''}
         quality={95}
         sizes="(max-width: 1023px) 200vw, 200vh"
-        className={`z-10 ${isCover ? 'object-cover' : 'object-contain sm:object-cover'} max-w-full`}
+        // className={`z-10 ${isCover ? 'object-cover' : 'object-contain sm:object-cover'} max-w-full`}
+        className={`z-10 ${isCover ? 'object-cover' : 'object-cover'} max-w-full`}
         layout="fill"
         style={{
           display: 'block',
