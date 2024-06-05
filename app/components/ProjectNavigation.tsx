@@ -28,14 +28,14 @@ const ImageNavigation: React.FC<ImageNavigationProps> = ({ onNext, onPrev }) => 
     <>
       <nav className="h-full absolute flex top-0 text-3xl w-full items-center justify-between z-20 text-white font-bold">
         <button
-          className="w-1/2 p-4 md:p-8 h-full cursor-w-resize flex items-center justify-start"
+          className="w-1/2 p-4 md:p-8 h-full flex items-center justify-start"
           aria-label="Previous image"
           onClick={onPrev}
         >
           <span>&larr;</span>
         </button>
         <button
-          className="w-1/2 p-4 md:p-8 h-full cursor-e-resize flex items-center justify-end"
+          className="w-1/2 p-4 md:p-8 h-full flex items-center justify-end"
           aria-label="Next image"
           onClick={onNext}
         >
