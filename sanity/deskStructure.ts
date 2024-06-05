@@ -5,7 +5,7 @@ const deskStructure = (S: any, context: any) =>
     .title('Content')
     .items([
       S.listItem()
-        .title('Globals')
+        .title('Content')
         .icon(() => '⛓️')
         .child(S.document().schemaType('globals').documentId('globals')),
       S.divider(),

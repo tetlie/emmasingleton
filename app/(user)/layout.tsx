@@ -9,9 +9,9 @@ import CanvasWrapper from '../components/CanvasWrapper'
 export async function generateMetadata(): Promise<Metadata> {
   const globals = await getGlobals()
 
-  const title = globals?.title || 'ES'
-  const description = globals.description || 'ES'
-  const imageUrl = globals?.image?.url || ''
+  const title = globals?.seo?.title || globals?.title || 'Emma Singleton'
+  const description = globals.seo?.description || 'Portfolio'
+  const imageUrl = globals?.seo?.image?.url || ''
 
   return {
     title,
@@ -38,7 +38,7 @@ export default async function RootLayout({
             {children}
             <CanvasWrapper />
           </main>
-          <Footer />
+          <Footer globals={globals} />
         </body>
       </AppWrapper>
     </html>

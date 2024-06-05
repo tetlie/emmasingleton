@@ -5,6 +5,12 @@ import { Globals } from '@/typings'
 
 const query = groq`*[_type == "globals"][0]{
   ...,
+  seo->{
+    ...,
+    image->{
+      ...,
+    }
+  },
   "image": image.asset->{
     ...,
     title,
@@ -17,6 +23,18 @@ const query = groq`*[_type == "globals"][0]{
     ...,
     asset->{
       ...,
+    }
+  },
+  projects[]->{
+    ...,
+    projectImages[] {
+      ...,
+      image {
+        ...,
+        asset->{
+          ...,
+        }
+      }
     }
   }
 }`

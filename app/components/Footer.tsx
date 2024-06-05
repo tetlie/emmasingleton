@@ -1,13 +1,14 @@
 'use client'
 
 import { useContext, useEffect, useState } from 'react'
+import type { Globals } from '@/typings'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { CanvasActionsContext, CanvasStateContext } from './Context'
 import { PortableTextComponents } from './PortableTextComponents'
 import { PortableText } from '@portabletext/react'
 import type { PortableTextBlock } from 'sanity'
 
-export default function Footer() {
+export default function Footer({ globals }: { globals: Globals }) {
   const { footerText, canvasIsOpen, hasDrawn } = useContext(CanvasStateContext)
   const { toggleCanvas, clearCanvas } = useContext(CanvasActionsContext)
   const [displayedFooterText, setDisplayedFooterText] = useState(footerText)
@@ -36,7 +37,7 @@ export default function Footer() {
     exit: { opacity: 0, y: -10 },
   }
   return (
-    <footer className="w-full leading-none transition-height duration-150 ease-in text-sm md:text-lg relative flex items-end md:items-center z-50 justify-between px-2 bg-white md:px-4 lg:px-8 py-3 lg:py-4">
+    <footer className="w-full leading-none transition-height duration-150 ease-in text-sm md:text-lg relative flex items-end md:items-center z-30 justify-between px-2 bg-white md:px-4 lg:px-8 py-3 lg:py-4">
       <AnimatePresence mode="wait">
         {canvasIsOpen &&
           (hasDrawn ? (
@@ -70,7 +71,14 @@ export default function Footer() {
                 &nbsp;
                 <br />
               </span>
-              Draw something
+              {globals?.drawingBoardText ? (
+                <PortableText
+                  value={globals.drawingBoardText}
+                  components={PortableTextComponents}
+                />
+              ) : (
+                'Draw something.'
+              )}
             </motion.span>
           ))}
         {!canvasIsOpen && (

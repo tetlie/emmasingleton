@@ -18,12 +18,11 @@ export interface Image extends SanityImageAssetDocument {
 }
 
 export interface Globals extends SanityDocument {
-  title: string
-  description?: string
-  image?: Image
-  images?: Image[]
-  menu?: { _key: string; type: 'section'; content: PortableTextBlock[] }[]
   seo?: SEO
+  title: string
+  menu?: { _key: string; type: 'section'; content: PortableTextBlock[] }[]
+  projects?: Project[]
+  drawingBoardText?: PortableTextBlock[]
 }
 
 export interface ProjectImage {

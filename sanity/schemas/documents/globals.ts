@@ -11,49 +11,53 @@ export default defineType({
   name: 'globals',
   title: 'Globals',
   type: 'document',
+  groups: [
+    { title: 'Header', name: 'header', default: true },
+    { title: 'Projects', name: 'projects' },
+    { title: 'Footer', name: 'footer' },
+    { title: 'SEO', name: 'seo' },
+  ],
   icon: () => '⛓️',
   fields: [
+    defineField({
+      group: 'seo',
+      name: 'seo',
+      type: 'object',
+      title: 'SEO',
+      description: 'Displayed in search results and when sharing.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Description',
+          type: 'text',
+        }),
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: { hotspot: true },
+        }),
+      ],
+    }),
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      description: 'Site title',
+      description: 'Site title, displayed the header',
+      group: 'header',
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      description: 'SEO / OpenGraph description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      description: 'SEO / OpenGraph image',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'images',
-      title: 'Project Images',
-      description:
-        'Select images to display in the project-gallery. Add descriptions directy to the images in the "Media"-section in the top menu.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          name: 'image',
-          title: 'Image',
-          type: 'image',
-          icon: () => '🖼️',
-          options: { hotspot: true },
-        }),
-      ],
     }),
     defineField({
       name: 'menu',
       title: 'Menu Sections',
       type: 'array',
       description: 'Displayed in the menu',
+      group: 'header',
       of: [
         defineField({
           name: 'section',
@@ -88,11 +92,26 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'projects',
+      title: 'Projects',
+      type: 'array',
+      description: 'Projects to display. Edit the order by dragging the items.',
+      of: [
+        {
+          title: 'Project',
+          type: 'reference',
+          to: [{ type: 'project' }],
+        },
+      ],
+      group: 'projects',
+    }),
+    defineField({
+      type: 'blockContent',
+      name: 'drawingBoardText',
+      title: 'Drawing Board Text',
+      description: 'Text below the drawing board, when open. Keep it short.',
+      group: 'footer',
+    }),
   ],
-  preview: {
-    select: {
-      title: 'title',
-      media: 'image',
-    },
-  },
 })
