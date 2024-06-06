@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { Globals } from '@/typings'
 import { PortableText } from '@portabletext/react'
 import { PortableTextComponents } from '@/app/components/PortableTextComponents'
@@ -13,8 +13,7 @@ export default function Header({ globals }: { globals: Globals }) {
   return (
     <>
       {menuIsOpen && <div className="fixed z-40 top-0 left-0 w-screen h-svh "></div>}
-
-      <header className="w-full relative">
+      <header className="w-full relative min-h-[44px] lg:min-h-[52px]">
         <div className="absolute top-0 left-0 block text-left bg-transparent w-full">
           <button
             type="button"
