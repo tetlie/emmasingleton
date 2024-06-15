@@ -82,10 +82,6 @@ export default function Footer({ globals }: { globals: Globals }) {
                 onClick={clearCanvas}
                 className="underline-offset-2 decoration-1 decoration-black"
               >
-                <span className="md:hidden">
-                  &nbsp;
-                  <br />
-                </span>
                 Clear canvas
               </motion.button>
             ) : (
@@ -96,11 +92,8 @@ export default function Footer({ globals }: { globals: Globals }) {
                 exit="exit"
                 transition={{ duration: 0.2 }}
                 variants={textAnimation}
+                className="truncate max-w-[80vw]"
               >
-                <span className="md:hidden">
-                  &nbsp;
-                  <br />
-                </span>
                 {globals?.drawingBoardText ? (
                   <PortableText
                     value={globals.drawingBoardText}
