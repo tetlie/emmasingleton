@@ -8,21 +8,24 @@ import {
   ReactNode,
   Dispatch,
   SetStateAction,
-  useEffect,
 } from 'react'
 import { PortableTextBlock } from 'sanity'
 
 export type CanvasStateType = {
   hasDrawn: boolean
   canvasIsOpen: boolean
-  footerText: PortableTextBlock[]
+  descriptionIsOpen: boolean
+  footerText: string
+  projectDescription: PortableTextBlock[]
 }
 
 export type CanvasActionsType = {
   setHasDrawn: Dispatch<SetStateAction<boolean>>
   setCanvasIsOpen: Dispatch<SetStateAction<boolean>>
   toggleCanvas: () => void
-  setFooterText: Dispatch<SetStateAction<PortableTextBlock[]>>
+  setFooterText: Dispatch<SetStateAction<string>>
+  setDescriptionIsOpen: Dispatch<SetStateAction<boolean>>
+  setProjectDescription: Dispatch<SetStateAction<PortableTextBlock[]>>
   clearCanvas: () => void
   setClearCanvas: Dispatch<SetStateAction<() => void>>
 }
@@ -30,14 +33,18 @@ export type CanvasActionsType = {
 export const CanvasStateContext = createContext<CanvasStateType>({
   hasDrawn: false,
   canvasIsOpen: false,
-  footerText: [],
+  descriptionIsOpen: false,
+  footerText: 'Loading...',
+  projectDescription: [],
 })
 
 export const CanvasActionsContext = createContext<CanvasActionsType>({
   setHasDrawn: () => {},
   setCanvasIsOpen: () => {},
+  setDescriptionIsOpen: () => {},
   toggleCanvas: () => {},
   setFooterText: () => {},
+  setProjectDescription: () => {},
   clearCanvas: () => {},
   setClearCanvas: () => {},
 })
@@ -45,33 +52,42 @@ export const CanvasActionsContext = createContext<CanvasActionsType>({
 export function AppWrapper({ children }: { children: ReactNode }) {
   const [hasDrawn, setHasDrawn] = useState<boolean>(false)
   const [canvasIsOpen, setCanvasIsOpen] = useState<boolean>(false)
-  const [footerText, setFooterText] = useState<PortableTextBlock[]>([])
+  const [descriptionIsOpen, setDescriptionIsOpen] = useState<boolean>(false)
+  const [footerText, setFooterText] = useState<string>('Loading...')
+  const [projectDescription, setProjectDescription] = useState<PortableTextBlock[]>([])
   const [clearCanvas, setClearCanvas] = useState<() => void>(() => () => {})
 
   const toggleCanvas = useCallback(() => {
     setCanvasIsOpen((prevState) => !prevState)
+    setDescriptionIsOpen(false)
   }, [])
 
   const state = useMemo(
-    () => ({ hasDrawn, canvasIsOpen, footerText }),
-    [hasDrawn, canvasIsOpen, footerText]
+    () => ({ hasDrawn, canvasIsOpen, descriptionIsOpen, footerText, projectDescription }),
+    [hasDrawn, canvasIsOpen, descriptionIsOpen, footerText, projectDescription]
   )
   const actions = useMemo(
     () => ({
       setHasDrawn,
       setCanvasIsOpen,
+      setDescriptionIsOpen,
       toggleCanvas,
       setFooterText,
+      setProjectDescription,
       clearCanvas,
       setClearCanvas,
     }),
-    [setHasDrawn, setCanvasIsOpen, toggleCanvas, setFooterText, clearCanvas, setClearCanvas]
+    [
+      setHasDrawn,
+      setCanvasIsOpen,
+      setDescriptionIsOpen,
+      toggleCanvas,
+      setFooterText,
+      setProjectDescription,
+      clearCanvas,
+      setClearCanvas,
+    ]
   )
-
-  useEffect(() => {
-    console.log('Canvas is open:', canvasIsOpen)
-  }),
-    [canvasIsOpen]
 
   return (
     <CanvasStateContext.Provider value={state}>
