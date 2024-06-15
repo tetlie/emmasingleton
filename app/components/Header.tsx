@@ -29,7 +29,7 @@ export default function Header({ globals }: { globals: Globals }) {
                   menuIsOpen ? 'underline ' : 'hover:underline '
                 }`}
               >
-                Work, information
+                Info
               </span>
               <div className="size-[20px] bg-black rounded-full"></div>
             </div>
