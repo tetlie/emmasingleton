@@ -34,5 +34,13 @@ const query = groq`*[_type == "globals"][0]{
 }`
 
 export default async function getGobals(): Promise<Globals> {
-  return client.fetch(query)
+  return client.fetch(
+    query,
+    {},
+    {
+      next: {
+        revalidate: 5 * 60, // look for updates to revalidate cache every five minutes
+      },
+    }
+  )
 }
