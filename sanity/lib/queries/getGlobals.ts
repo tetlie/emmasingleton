@@ -19,12 +19,6 @@ const query = groq`*[_type == "globals"][0]{
     extension, 
     description
   },
-  "images": images[] {
-    ...,
-    asset->{
-      ...,
-    }
-  },
   projects[]->{
     ...,
     projectImages[] {
