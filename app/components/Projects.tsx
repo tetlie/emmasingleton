@@ -6,8 +6,6 @@ import { CanvasActionsContext } from './Context'
 import ProjectNavigation from './ProjectNavigation'
 import ProjectImage from './ProjectImage'
 
-import { motion, AnimatePresence, type Variants } from 'framer-motion'
-
 export default function Projects({ projects }: { projects: Project[] }) {
   const { setFooterText, setProjectDescription, setDescriptionIsOpen } =
     useContext(CanvasActionsContext)
@@ -52,27 +50,14 @@ export default function Projects({ projects }: { projects: Project[] }) {
     return null
   }
 
-  const textAnimation: Variants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  }
-
   return (
     <div className="relative h-full max-h-max w-full overflow-hidden ">
-      <AnimatePresence mode="wait">
-        <motion.div
-          className="w-full h-full relative flex items-center justify-center"
-          key={currentImage.index}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={textAnimation}
-          transition={{ duration: 0.2 }}
-        >
-          <ProjectImage asset={currentImage.asset} layout={currentImage.layout} />
-        </motion.div>
-      </AnimatePresence>
+      <div
+        className="w-full h-full relative flex items-center justify-center"
+        key={currentImage.index}
+      >
+        <ProjectImage asset={currentImage.asset} layout={currentImage.layout} />
+      </div>
 
       <ProjectNavigation onNext={handleNext} onPrev={handlePrev} />
     </div>
