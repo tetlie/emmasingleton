@@ -32,7 +32,8 @@ const ProjectImage: React.FC<ImageDisplayProps> = ({ asset, layout }) => {
         blurDataURL={lqip}
         placeholder="blur"
         src={url}
-        loading="lazy"
+        loading="eager"
+        priority
         alt={altText || ''}
         quality={95}
         sizes="(max-width: 1023px) 200vw, 200vh"
