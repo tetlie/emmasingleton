@@ -8,6 +8,9 @@ const imageBuilder = createImageUrlBuilder({
   dataset: dataset || '',
 })
 
-export const urlForImage = (source: Image) => {
-  return imageBuilder?.image(source).auto('format').fit('max').url()
+export const urlForImage = (source: Image): string | null => {
+  if (!source) {
+    return null
+  }
+  return imageBuilder?.image(source).auto('format').fit('max').quality(85).url()
 }
