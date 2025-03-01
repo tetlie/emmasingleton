@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <AppWrapper>
-        <body className="h-svh relative text-base flex flex-col overflow-hidden md:text-lg font-serif bg-white antialiased">
+        <body className="h-dvh relative text-base flex flex-col overflow-hidden md:text-lg font-serif bg-white antialiased">
           <Header globals={globals} />
           <main className="relative flex flex-grow flex-col items-center justify-between">
             {children}

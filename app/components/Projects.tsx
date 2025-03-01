@@ -79,7 +79,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
   const handlePrev = () => emblaApi?.scrollPrev()
 
   return (
-    <div className="relative h-full max-h-max w-full overflow-hidden">
+    <div className="relative h-full w-full overflow-hidden">
       <div className={`h-full w-full ${emblaFadeClass}`} ref={emblaRef}>
         <div className="h-full flex">
           {projectImages.map((image) => {
@@ -93,7 +93,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
             const isCover = layout === 'cover'
             return (
               <div
-                key={_key}
+                key={src}
                 className="flex-[0_0_100%] w-full h-full relative flex items-center justify-center"
               >
                 <figure
@@ -109,7 +109,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                     blurDataURL={lqip}
                     placeholder="blur"
                     alt={altText}
-                    sizes="(max-width: 1023px) 200vw, 200vh"
+                    sizes="(max-width: 1023px) 100vw, 100vh"
                     className={`block z-10 max-w-full ${
                       isCover ? 'object-cover' : 'object-cover lg:object-contain'
                     }`}

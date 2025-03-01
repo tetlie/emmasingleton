@@ -8,7 +8,25 @@
   }
 }
 
-/* Add this to your global styles or a CSS module */
+/* Fix for Safari mobile height issues */
+@supports (-webkit-touch-callout: none) {
+  body,
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Make sure images maintain aspect ratio properly */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Animate footer height */
 .footer-container {
   transition: height 0.5s ease-in-out;
 }

@@ -12,5 +12,5 @@ export const urlForImage = (source: Image): string | null => {
   if (!source) {
     return null
   }
-  return imageBuilder?.image(source).auto('format').fit('max').quality(85).url()
+  return imageBuilder?.image(source).auto('format').fit('max').dpr(2).quality(85).url()
 }
