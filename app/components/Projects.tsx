@@ -86,7 +86,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
             const {
               layout,
               asset,
-              asset: { _key, metadata: { lqip = '', dimensions } = {}, altText = '' },
+              asset: { metadata: { lqip = '', dimensions } = {}, altText = '' },
             } = image
             const { width, height } = dimensions ?? {}
             const src = urlForImage(asset) ?? ''
@@ -109,7 +109,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                     blurDataURL={lqip}
                     placeholder="blur"
                     alt={altText}
-                    sizes="(max-width: 1023px) 100vw, 100vh"
+                    sizes={'200vw'}
                     className={`block z-10 max-w-full ${
                       isCover ? 'object-cover' : 'object-cover lg:object-contain'
                     }`}
